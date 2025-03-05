@@ -1,0 +1,29 @@
+
+services:
+  casa:
+    build:
+      dockerfile: Dockerfile
+      context: .
+      args:
+        - USER_GID=${USER_GID?Run `export USER_GID=$(id -g)`"}
+        - USER_UID=${USER_UID?Run `export USER_UID=$(id -u)`"}
+        - USERNAME=${USERNAME?Run `export USERNAME=$(whoami)`"}
+    image: casa
+    container_name: casa
+    environment:
+      - DISPLAY=${DISPLAY?Run `export DISPLAY=:0` (or equivalent)"}
+      - XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR?err"}
+    volumes:
+      - ${XDG_RUNTIME_DIR}:${XDG_RUNTIME_DIR}
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /home/${USERNAME}/.Xauthority:/home/${USERNAME}/.Xauthority
+      - ${PWD}/casa:/home/${USERNAME}/.casa
+      - ${PWD}/data:/home/${USERNAME}/data
+    devices:
+      - "/dev/fuse:mrw"
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - "apparmor:unconfined"
+    privileged: true
+    network_mode: "host"

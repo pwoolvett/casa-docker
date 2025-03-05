@@ -18,6 +18,10 @@ compose: .env xhost down
 	docker compose up -d casa
 	docker compose exec -it casa bash
 
+attach:
+	docker compose exec -it casa bash
+
+
 install-docker:
 	curl -fsSL https://get.docker.com -o /tmp/get-docker.sh
 	sudo sh /tmp/get-docker.sh
@@ -32,6 +36,8 @@ down:
 	docker compose down
 
 clean:
+	docker compose kill || true
+	docker compose down || true
 	rm .env || true
 
 cleandata:

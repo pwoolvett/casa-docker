@@ -22,17 +22,18 @@ RUN : \
   && :
 
 # extract casa into /opt/casa
+ARG CASA_VERSION=casa-6.7.0-31-py3.12.el8
 RUN : \
   && wget \
     -O /tmp/casa.tar.xz \
-    https://casa.nrao.edu/download/distro/casa/release/rhel/casa-6.7.0-31-py3.12.el8.tar.xz \
+    https://casa.nrao.edu/download/distro/casa/release/rhel/${CASA_VERSION}.tar.xz \
   && mkdir -p /opt/casa \
   && cd /opt/casa \
   && tar -xvf /tmp/casa.tar.xz \
   && rm /tmp/casa.tar.xz \
   && :
 
-ENV PATH="/opt/casa/casa-6.7.0-31-py3.12.el8/bin:$PATH"
+ENV PATH="/opt/casa/${CASA_VERSION}/bin:$PATH"
 
 
 # Create the user

@@ -8,6 +8,7 @@ services:
         - USER_GID=${USER_GID?Run `export USER_GID=$(id -g)`"}
         - USER_UID=${USER_UID?Run `export USER_UID=$(id -u)`"}
         - USERNAME=${USERNAME?Run `export USERNAME=$(whoami)`"}
+        - CASA_VERSION=${CASA_VERSION?err"}
     image: casa
     container_name: casa
     environment:
@@ -26,4 +27,4 @@ services:
     security_opt:
       - "apparmor:unconfined"
     privileged: true
-    network_mode: "host"
+    # network_mode: "host"

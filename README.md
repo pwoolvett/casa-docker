@@ -3,7 +3,7 @@
 ## setup
 
 ### prerequisites
-* x11 (you mus tbe in an x11 session)
+* x11 (you must be in an x11 session)
 * git (`sudo apt-get install git`)
 * curl (`sudo apt-get install curl`)
 * make (`sudo apt-get install build-essential`)

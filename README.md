@@ -48,6 +48,7 @@ This means the `./data` folder (besides this README) lives in `~/data` in the co
 * cleanup dockerfile: too many deps
 * detect wayland host and setup qt env vars
 * what fuse is needed on host?
+* "make install" -> create bashrc alias to `cd && make`
 
 ## LICENSE
 

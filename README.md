@@ -3,20 +3,23 @@
 ## setup
 
 ### prerequisites
-* git
-* curl
-* x11
-* make
-* docker (`make install-docker`)
+* x11 (you mus tbe in an x11 session)
+* git (`sudo apt-get install git`)
+* curl (`sudo apt-get install curl`)
+* make (`sudo apt-get install build-essential`)
+* docker (`make install-docker`, then reboot)
+* did you reboot?
 
 ## usage
 * `git clone https://github.com/pwoolvett/casa-docker`
 * `cd casa-docker`
 * `make`
+* grab a coffe (~10min)
+* you are now inside a shell with `casa`, `casaviewer`, etc installed. launch any
 
 ## Comments on paths and volume mounts
 
-You'll need to used container paths in code/ui.
+You'll need to use container paths in code/ui.
 
 Volumes are mounted from host to container, see `compose.yml`. Example
 

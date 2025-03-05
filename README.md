@@ -3,12 +3,15 @@
 ## setup
 
 ### prerequisites
+* git
+* curl
 * x11
 * make
 * docker (`make install-docker`)
 
 ## usage
-
+* `git clone https://github.com/pwoolvett/casa-docker`
+* `cd casa-docker`
 * `make`
 
 ## Comments on paths and volume mounts

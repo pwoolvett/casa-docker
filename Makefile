@@ -7,6 +7,8 @@ USER_GID=$(shell id -g)
 USER_UID=$(shell id -u)
 USERNAME=$(shell whoami)
 
+DOCKER := $(shell command -v docker)
+
 .env: clean
 	echo "USER_GID=$(USER_GID)" > .env
 	echo "USER_UID=$(USER_UID)" >> .env
@@ -23,18 +25,26 @@ compose: .env xhost down
 bash:
 	docker compose exec -it casa bash
 
-host-deps:
+host-deps: 
+	make install-docker
+
+
+
+.docker-install-deps:
 	sudo apt-get install -y \
 	  git \
 	  curl
-	make install-docker
 
 install-docker:
+ifndef DOCKER
+	make .docker-install-deps
 	curl -fsSL https://get.docker.com -o /tmp/get-docker.sh
 	sudo sh /tmp/get-docker.sh
 	sudo groupadd docker || true
 	sudo usermod -aG docker $(USERNAME) || true
 	echo "now reboot or logout"
+endif
+
 
 xhost:
 	bash -c 'DISPLAY=:0 xhost +'

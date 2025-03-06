@@ -32,7 +32,6 @@ host-deps:
 
 .docker-install-deps:
 	sudo apt-get install -y \
-	  git \
 	  curl
 
 install-docker:

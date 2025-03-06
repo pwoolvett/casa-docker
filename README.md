@@ -12,6 +12,7 @@
 * `git clone https://github.com/pwoolvett/casa-docker`
 * `cd casa-docker`
 * `make host-deps` (this will install `docker` if not available)
+* IMPORTANT: if you did not have docker already installed, reboot at this point.
 * Manually check the vars in the `Makefile`
     * `DISPLAY`: validate with `printenv DISPLAY`
     * `CASA_VERSION`: default 6.7 works. To change, select from [casa distro link](https://casa.nrao.edu/download/distro/casa/release/rhel/)

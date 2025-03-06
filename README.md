@@ -6,18 +6,12 @@
 
 * x11 (you must be in an x11 session)
 * make (`sudo apt-get install build-essential`)
-* host deps:
-    * Alternaitve A: install all with `make host-deps`
-    * Alternative B: manually, or non-debian:
-        * git (`sudo apt-get install git`)
-        * curl (`sudo apt-get install curl`)
-        * docker (`make install-docker`, then reboot)
-    * reboot
-* did you reboot?
+* git (`sudo apt-get install git`)
 
 ## install
 * `git clone https://github.com/pwoolvett/casa-docker`
 * `cd casa-docker`
+* `make host-deps` (this will install `docker` if not available)
 * Manually check the vars in the `Makefile`
     * `DISPLAY`: validate with `printenv DISPLAY`
     * `CASA_VERSION`: default 6.7 works. To change, select from [casa distro link](https://casa.nrao.edu/download/distro/casa/release/rhel/)

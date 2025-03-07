@@ -13,11 +13,11 @@ services:
     container_name: casa
     environment:
       - DISPLAY=${DISPLAY?Run `export DISPLAY=:0` (or equivalent)"}
-      - XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR?err"}
+      - XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR?err"}  # QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-
     volumes:
       - ${XDG_RUNTIME_DIR}:${XDG_RUNTIME_DIR}
       - /tmp/.X11-unix:/tmp/.X11-unix
-      - /home/${USERNAME}/.Xauthority:/home/${USERNAME}/.Xauthority
+      - /home/${USERNAME}/.Xauthority:/home/${USERNAME}/.Xauthority  # not needed?
       - ${PWD}/casa:/home/${USERNAME}/.casa
       - ${PWD}/data:/home/${USERNAME}/data
     devices:

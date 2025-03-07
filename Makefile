@@ -1,6 +1,6 @@
 
 # manually set these
-DISPLAY=":0"
+#DISPLAY=":0"
 CASA_VERSION="casa-6.7.0-31-py3.12.el8"
 
 USER_GID=$(shell id -g)
@@ -16,7 +16,7 @@ DOCKER := $(shell command -v docker)
 	echo "DISPLAY=$(DISPLAY)" >> .env
 	echo "CASA_VERSION=$(CASA_VERSION)" >> .env
 
-compose: .env xhost down 
+compose: .env xhost down
 
 	docker compose build
 	docker compose up -d casa

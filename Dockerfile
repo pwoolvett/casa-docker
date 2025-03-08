@@ -7,21 +7,15 @@ ARG USER_GID
 ARG USERNAME
 
 
-# install prerequisites
+# install wget and xz-utils
 RUN : \
   && apt-get update \
   && apt-get install -y \
   wget \
   xz-utils \
-  fuse \
-  fontconfig \
-  imagemagick \
-  libglib2* \
-  libcanberra-gtk* \
-  libgfortran* \
   && :
-
-# extract casa into /opt/casa
+  
+# Download and extract casa into /opt/casa
 ARG CASA_VERSION=casa-6.7.0-31-py3.12.el8
 RUN : \
   && wget \
@@ -35,6 +29,24 @@ RUN : \
 
 ENV PATH="/opt/casa/${CASA_VERSION}/bin:$PATH"
 
+  
+# install CASA prerequisites
+RUN : \
+  && apt-get install -y \
+  fuse \
+  fontconfig \
+  imagemagick \
+  libglib2* \
+  libcanberra-gtk* \
+  libgfortran* \
+  && :
+  
+# install ANY other package (personal use or debugging)
+RUN : \
+  && apt-get install -y \
+  mesa-utils \
+  && :
+
 
 # Create the user
 RUN : \
@@ -46,6 +58,8 @@ RUN : \
     --gid $USER_GID \
     -m \
     $USERNAME \
+  && usermod \
+    -aG video $USERNAME \
   && apt-get update \
   && apt-get install -y \
     sudo \

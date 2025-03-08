@@ -59,4 +59,4 @@ clean: stop
 	rm .env || true
 
 cleandata:
-	rm -rf data
+	rm -rf dotcasa/data

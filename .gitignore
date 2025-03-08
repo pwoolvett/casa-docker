@@ -1,6 +1,3 @@
 # .gitignore sample
 
 .env
-data
-casa/*
-!casa/config.py

@@ -25,7 +25,7 @@ compose: .env xhost ensureborders down  # Is this "down" really necessary? .env 
 connect:
 	docker compose exec -it casa bash
 
-host-deps: cleangitkeeps
+host-deps:
 	make install-docker
 
 .docker-install-deps:

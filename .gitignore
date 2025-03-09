@@ -6,5 +6,3 @@ dotcasa/*
 !dotcasa/README.md
 casa/*
 !casa/README.md
-casa/data/*
-casa/logs/*

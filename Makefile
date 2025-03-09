@@ -25,7 +25,7 @@ compose: .env xhost ensureborders down  # Is this "down" really necessary? .env 
 connect:
 	docker compose exec -it casa bash
 
-host-deps:
+host-deps: cleangitkeeps
 	make install-docker
 
 .docker-install-deps:
@@ -60,3 +60,7 @@ cleandata:
 
 ensureborders:
 	pkill -HUP mutter-x11  # Reinitialize mutter to ensure borders on hosts with GNOME ~46. Ignore related warnings if any.
+
+cleangitkeeps:
+	rm -f casa/data/.gitkeep
+	rm -f casa/logs/.gitkeep

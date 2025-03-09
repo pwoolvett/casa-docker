@@ -87,10 +87,14 @@ RUN : \                    # This RUN sets a specific step "n/N" in the containe
   * Try again from start (*Make a backup Dockerfile:*)
 
 ## TODO
+* vwoolvett: What happens when container is built, but CASA version is changed and container re-built? Mounted volumes won't be affected, but does it affect anything else?
+* vwoolvett: Add option to install an ALMA pipeline version of CASA (for raw data calibration and imaging), instead of a normal CASA version (image processing).
+* vwoolvett: add uninstall procedure in Makefile to remove the container/image and/or reinstall from scratch.
+
 * cleanup compose: too many privileges
 * cleanup dockerfile: too many deps
 * detect wayland host and setup qt env vars
-* what fuse is needed on host?
+* what fuse is needed on host? *vwoolvett: I installed libfuse2t64 (libfuse2 in ubuntu 24.04) to fix borders problem (fix was something else), but it was not necessary in the first place IMO.*
 * "make install" -> create bashrc alias to `cd && make`
 
 ## LICENSE

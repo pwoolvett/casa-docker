@@ -44,6 +44,7 @@ RUN : \
 # install ANY other package (personal use or debugging)
 RUN : \
   && apt-get install -y \
+  nano \
   mesa-utils \
   && :
 

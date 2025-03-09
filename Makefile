@@ -1,6 +1,6 @@
 
 # manually set these
-#DISPLAY=":0"
+# DISPLAY=":0", set if different.
 CASA_VERSION="casa-6.7.0-31-py3.12.el8"
 
 USER_GID=$(shell id -g)
@@ -16,19 +16,17 @@ DOCKER := $(shell command -v docker)
 	echo "DISPLAY=$(DISPLAY)" >> .env
 	echo "CASA_VERSION=$(CASA_VERSION)" >> .env
 
-compose: .env xhost down
+compose: .env xhost ensureborders down  # Is this "down" really necessary? .env runs clean, which runs stop, running "docker compose down || true"
 
 	docker compose build
 	docker compose up -d casa
 	docker compose exec -it casa bash
 
-bash:
+connect:
 	docker compose exec -it casa bash
 
-host-deps: 
+host-deps:
 	make install-docker
-
-
 
 .docker-install-deps:
 	sudo apt-get install -y \
@@ -43,7 +41,6 @@ ifndef DOCKER
 	sudo usermod -aG docker $(USERNAME) || true
 	echo "now reboot or logout"
 endif
-
 
 xhost:
 	bash -c 'DISPLAY=:0 xhost +'
@@ -60,3 +57,6 @@ clean: stop
 
 cleandata:
 	rm -rf dotcasa/data
+
+ensureborders:
+	pkill -HUP mutter-x11  # Reinitialize mutter to ensure borders on hosts with GNOME ~46. Ignore related warnings if any.

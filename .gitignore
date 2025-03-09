@@ -3,4 +3,6 @@
 .env
 dotcasa/*
 !dotcasa/config.py
+!dotcasa/README.md
 casa/*
+!casa/README.md

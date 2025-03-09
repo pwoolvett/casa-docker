@@ -14,6 +14,6 @@ See the [casaconfig site](https://casadocs.readthedocs.io/en/stable/api/casaconf
 
 ## The data folder inside dotcasa
 
-* This folder is created the first time that the container is built.
+* **Created when you build the container, if it does not exist.**.
 * The [External data](https://casadocs.readthedocs.io/en/stable/notebooks/external-data.html) necessary for proper CASA operation is stored here. 
 * This folder is managed automatically by CASA, and is updated on a daily basis if `casa` or `casaviewer` are run.

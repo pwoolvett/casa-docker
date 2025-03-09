@@ -33,19 +33,20 @@ Basic `make` commands work in directories with a file `Makefile` specifying thes
 
 * After the `make`, you are now inside a shell with `casa`, `casaviewer`, etc. installed. Launch any.
   * If this is the first time running CASA, it will automatically populate `~/.casa/data` with [External Data](https://casadocs.readthedocs.io/en/stable/notebooks/external-data.html).
-  * The `~/.casa/data` directory is re-populated daily - expect automatic downloads once a day.
-* The container runs in the background - you can exit back to host shell with CTRL+D or `exit`.
+  * The `~/.casa/data` directory is updated daily - expect automatic downloads once a day.
+* The container runs in the background - you can safely exit back to host shell with CTRL+D or `exit`.
 * If you want to reconnect again (**and the container is not stopped**) run `make connect` in host shell.
 * You may also kill/stop it with `make stop` in host shell, **but make sure that your (important) data is located inside a mounted volume** (explained in next section).
-* Rebooting the host machine will also kill the shell in the background, but progess **inside mounted volumes** is saved, as mounted volumes are updated in real time.
+* Rebooting the host machine will kill the container in the background, but progess **inside mounted volumes** is saved.
+* You may at some point want to erase the `~/.casa/data` folder used for External Data (e.g. network error while automatically downloading data at CASA startup). You can do so easily by running `make cleandata` in host.
 
 ### Comments on paths and volume mounts
 
 * **Changes, such as new files of any kind, outside mounted folders/volumes will be erased after stopping the container!!!**
-* Files in unmounted files are "temporary" (as in, while the container is running or in the background, i.e. **not stopped**).
+* Files in unmounted volumes are "temporary" - they exist while the container is running (in shell) or in the background (i.e. **not stopped**).
 * The /home/username folder itself inside the container is not mounted to host by default, so new files in container home are deleted when container is stopped.
-* It is therefore recommended to run `casa` inside the /home/username/casa folder or other mounted volumes, as .last files for tasks run in casa will be saved to that current directory, which is, presumably, properly mounted.
-* **You can safely create new folders and files within mounted volumes, from either host or container, as these are saved in real time.**
+* It is therefore recommended to run `casa` inside the /home/username/casa folder or other mounted volumes, as the usual `task.last` files for tasks run in CASA will be saved to the current working directory, which is presumably a real (not temporary) directory.
+* **You can safely create new folders and files within mounted volumes, from either host or container, as mounted volumes are synchronized in real time with the specified (`compose.yml`) folders in host.**
 
 You'll need to use container paths in code/ui to mount new folders.
 
@@ -85,7 +86,7 @@ RUN : \                    # This RUN sets a specific step "n/N" in the containe
   * Delete the Dockerfile `rm Dockerfile` and rename the backup `mv Dockerfile.bkp Dockerfile`
   * Try again from start (*Make a backup Dockerfile:*)
 
-# TODO
+## TODO
 * cleanup compose: too many privileges
 * cleanup dockerfile: too many deps
 * detect wayland host and setup qt env vars

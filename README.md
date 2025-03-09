@@ -28,9 +28,25 @@ Move to the directory where you want to clone this repository. There:
 
 * After the `make`, you are now inside a shell with `casa`, `casaviewer`, etc. installed. Launch any.
   * If this is the first time running CASA, it will automatically populate `~/.casa/data` with [External Data](https://casadocs.readthedocs.io/en/stable/notebooks/external-data.html).
-  * This `~/.casa/data` directory is re-populated daily - expect automatic downloads when running casa once a day.
-* The container runs in the background - you can exit back to host shell with CTRL+D or `exit`, and also kill it with `make stop` in host shell.
-* If you want to reconnect again, **and the container is not stopped** (no `make stop` executed), just run `make connect` in host shell.
+  * The `~/.casa/data` directory is re-populated daily - expect automatic downloads once a day.
+* The container runs in the background - you can exit back to host shell with CTRL+D or `exit`.
+* If you want to reconnect again (**and the container is not stopped**) run `make connect` in host shell.
+* You may also safely kill/stop it with `make stop` in host shell.
+* Rebooting the host machine will also kill the shell in the background, but progess **inside mounted volumes** is saved.
+
+### Comments on paths and volume mounts
+
+You'll need to use container paths in code/ui.
+
+Volumes are mounted from host to container, see `compose.yml`. Example:
+
+```yaml
+    volumes:
+      - ${PWD}/casa:/home/${USERNAME}/casa
+      - ${PWD}/dotcasa:/home/${USERNAME}/.casa
+```
+
+This means the `./dotcasa` folder (besides this README) lives in `~/.casa` in the container.
 
 ### Comments on installed packages in container
 You may want to add additional packages to this docker container. To do so:
@@ -49,24 +65,12 @@ RUN : \                    # This RUN sets a specific step "n/N" in the containe
   && :                     # This line MUST be at the end
 ```
 
-* **Save the Dockerfile and run** `make` **again**
+* **Save the Dockerfile and run** `make` **again**.
+  * Expect some delay, Docker will have to install your new packages into the container.
+  * As this step is almost at the end of the Dockerfile, Docker will skip all previous steps and only re-do this RUN where user packages are installed - no coffee, sorry.
 * If something does not work, you may have touched another line or entered the wrong format.
   * Delete the Dockerfile `rm Dockerfile` and rename the backup `mv Dockerfile.bkp Dockerfile`
   * Try again from start (*Make a backup Dockerfile:*)
-
-### Comments on paths and volume mounts
-
-You'll need to use container paths in code/ui.
-
-Volumes are mounted from host to container, see `compose.yml`. Example:
-
-```yaml
-    volumes:
-      - ${PWD}/casa:/home/${USERNAME}/casa
-      - ${PWD}/dotcasa:/home/${USERNAME}/.casa
-```
-
-This means the `./dotcasa` folder (besides this README) lives in `~/.casa` in the container.
 
 # TODO
 * cleanup compose: too many privileges

@@ -39,7 +39,7 @@ ifndef DOCKER
 	sudo sh /tmp/get-docker.sh
 	sudo groupadd docker || true
 	sudo usermod -aG docker $(USERNAME) || true
-	echo "now reboot or logout"
+	echo "-------------- NOW REBOOT --------------"
 endif
 
 xhost:

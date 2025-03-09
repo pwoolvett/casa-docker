@@ -6,7 +6,7 @@
 
 * x11 (you must be in an x11 session)
 * Wayland: you may try wayland after succesfully building the container and running `casa` in x11
-* make (`sudo apt-get install build-essential`)
+* make (`sudo apt-get install build-essential`) for ease of use
 * git (`sudo apt-get install git`)
 * curl (`sudo apt-get install curl`)
 
@@ -15,7 +15,7 @@
 Move to the directory where you want to clone this repository. There:
 * `git clone https://github.com/pwoolvett/casa-docker`
 * `cd casa-docker`
-* `make host-deps` This will install `docker` if not available. **If available, run anyways to clean dummmy files.**
+* `make host-deps` (install `docker` if not available)
 * IMPORTANT: if you did not have docker already installed, reboot at this point.
 * Manually check the vars in the `Makefile`
     * `DISPLAY`: validate with `printenv DISPLAY`. Uncomment and set if necessary.

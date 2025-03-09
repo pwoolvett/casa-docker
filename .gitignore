@@ -1,3 +1,6 @@
 # .gitignore sample
 
 .env
+dotcasa/*
+!dotcasa/config.py
+casa/*

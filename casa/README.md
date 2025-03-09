@@ -6,15 +6,15 @@
 
 * This is your default folder for CASA raw/science data storage and other files.
 * It exists in your host machine in the current directory and it is mounted at `~/casa` in the container.
-* Changes to this folder --and any sub-folder-- from either host or container will be saved after stopping the container.
-* It is recommended to run casa from this directory in the container or other mounted volumes --**otherwise .last files will be deleted after stopping the container**.
+* Changes to this folder ---and any sub-folder--- from either host or container will be saved after stopping the container.
+* It is recommended to run casa from this directory (or other mounted volume) in the container ---**otherwise .last files will be deleted after stopping the container**.
 * **Changes, such as new files of any kind, outside mounted folders/volumes will also be erased after stopping the container.**
 
 ## The data folder inside casa
 
 * This is where you may **safely store** your raw/science data.
 * To move it elsewhere inside a mounted volume or mounting a new one, follow the example given for the logs folder down below.
-* You can download new data from host and move it here --or somewhere else inside the parent "casa" folder or other mounted volumes-- as you see fit.
+* You can download new data from host and move it here ---or somewhere else inside the parent "casa" folder or other mounted volumes--- as you see fit.
 * **Changes, such as new files of any kind, outside mounted folders/volumes will be erased after stopping the container.**
 
 ## The logs folder inside casa

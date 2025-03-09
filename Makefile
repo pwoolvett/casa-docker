@@ -55,12 +55,8 @@ stop:
 clean: stop
 	rm .env || true
 
-cleandata:
-	rm -rf dotcasa/data
+cleanexternaldata:
+	rm -rf dotcasa/data/*
 
 ensureborders:
 	pkill -HUP mutter-x11  # Reinitialize mutter to ensure borders on hosts with GNOME ~46. Ignore related warnings if any.
-
-cleangitkeeps:
-	rm -f casa/data/.gitkeep
-	rm -f casa/logs/.gitkeep

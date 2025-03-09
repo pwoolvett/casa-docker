@@ -23,9 +23,12 @@ Move to the directory where you want to clone this repository. There:
 * grab a coffee (~10 min)
 
 ## Usage
-* After the `make`, you are now inside a shell with `casa`, `casaviewer`, etc installed. Launch any.
-  * If this is the first time running CASA, it will automatically populate the `~/.casa/data` directory with [External Data](https://casadocs.readthedocs.io/en/stable/notebooks/external-data.html).
-  * This `~/.casa/data` directory is re-populated on a daily basis. Expect automatic downloads when running casa once a day.
+
+### Basic commands and information
+
+* After the `make`, you are now inside a shell with `casa`, `casaviewer`, etc. installed. Launch any.
+  * If this is the first time running CASA, it will automatically populate `~/.casa/data` with [External Data](https://casadocs.readthedocs.io/en/stable/notebooks/external-data.html).
+  * This `~/.casa/data` directory is re-populated daily - expect automatic downloads when running casa once a day.
 * The container runs in the background - you can exit back to host shell with CTRL+D or `exit`, and also kill it with `make stop` in host shell.
 * If you want to reconnect again, **and the container is not stopped** (no `make stop` executed), just run `make connect` in host shell.
 
@@ -38,7 +41,7 @@ You may want to add additional packages to this docker container. To do so:
 
 ```yaml
 # install ANY other package (personal use or debugging)
-RUN : \                    # This RUN sets a specific step "n/N" in the building process of the container
+RUN : \                    # This RUN sets a specific step "n/N" in the container building process
   && apt-get install -y \  # install instruction, accepting any prompts with -y option
   nano \                   # This adds a commonly used text editor to the container (default)
   YOUR-PACKAGE-1 \         # here you may add additional packages

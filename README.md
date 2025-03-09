@@ -60,7 +60,7 @@ Volumes are mounted from host to container, see `compose.yml`. Example:
 
 This means the `./dotcasa` folder (besides this README) lives in `~/.casa` in the container.
 
-**Read the READMEs inside `./casa` and `./dotcasa` for more information on these default folders how to move them safely.**
+**Read the READMEs inside `./casa` and `./dotcasa` for more information on these default folders and how to move them safely.**
 
 ### Comments on installed packages in container
 You may want to add additional packages to this docker container. To do so:
@@ -81,7 +81,7 @@ RUN : \                    # This RUN sets a specific step "n/N" in the containe
 
 * **Save the Dockerfile and run** `make` **again**.
   * Expect some small delay, as Docker will have to install your new packages into the container.
-  * As this step is almost at the end of the Dockerfile, Docker will skip all previous steps (setting up the virtual OS, downloading and insalling CASA and its prerequisites, etc.) and only re-do this RUN where user packages are installed - no coffee, sorry.
+  * As this step is almost at the end of the Dockerfile, Docker will skip all previous steps if the container was previously built (setting up the virtual OS, downloading and insalling CASA and its prerequisites, etc.) and only re-do this RUN where user packages are installed - no coffee, sorry.
 * If something does not work, you may have touched another line or entered the wrong format.
   * Delete the Dockerfile `rm Dockerfile` and rename the backup `mv Dockerfile.bkp Dockerfile`
   * Try again from start (*Make a backup Dockerfile:*)

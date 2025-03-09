@@ -1,8 +1,8 @@
 # .gitignore sample
 
 .env
-dotcasa/*
+dotcasa/
 !dotcasa/config.py
 !dotcasa/README.md
-casa/*
+casa/
 !casa/README.md

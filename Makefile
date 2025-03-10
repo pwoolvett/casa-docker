@@ -16,12 +16,18 @@ DOCKER := $(shell command -v docker)
 	echo "DISPLAY=$(DISPLAY)" >> .env
 	echo "CASA_VERSION=$(CASA_VERSION)" >> .env
 
-compose: .env xhost ensureborders down  # Is this "down" really necessary? .env runs clean, which runs stop, running "docker compose down || true"
-
+# first function without dot is assigned to command "make"=="make compose".
+# This function builds the container and applies changes to other files.
+compose: .env xhost ensureborders
 	docker compose build
 	docker compose up -d casa
 	docker compose exec -it casa bash
 
+# function to run on system start-up: starts the casa container.
+start: ensureborders
+	docker compose up -d casa
+
+# function to re-open the shell if the container is running
 connect:
 	docker compose exec -it casa bash
 
@@ -48,6 +54,7 @@ xhost:
 down:
 	docker compose down
 
+# function to stop the container
 stop:
 	docker compose kill || true
 	docker compose down || true
@@ -58,5 +65,6 @@ clean: stop
 cleanexternaldata:
 	rm -rf dotcasa/data/*
 
+# Reinitialize mutter to ensure borders on hosts with GNOME ~46. Ignore related warnings if any.
 ensureborders:
-	pkill -HUP mutter-x11  # Reinitialize mutter to ensure borders on hosts with GNOME ~46. Ignore related warnings if any.
+	pkill -HUP mutter-x11

@@ -23,13 +23,15 @@ compose: .env xhost ensureborders
 	docker compose up -d casa
 	docker compose exec -it casa bash
 
-# function to run on system start-up: starts the casa container.
+# function to start container on host start-up, and/or connect to container shell
 start: ensureborders
 	docker compose up -d casa
-
-# function to re-open the shell if the container is running
-connect:
-	docker compose exec -it casa bash
+	docker compose excec -it casa bash
+	
+# function to stop the container
+stop:
+	docker compose kill || true
+	docker compose down || true
 
 host-deps:
 	make install-docker
@@ -54,17 +56,11 @@ xhost:
 down:
 	docker compose down
 
-# function to stop the container
-stop:
-	docker compose kill || true
-	docker compose down || true
-
 clean: stop
 	rm .env || true
 
 cleanexternaldata:
 	rm -rf dotcasa/data/*
 
-# Reinitialize mutter to ensure borders on hosts with GNOME ~46. Ignore related warnings if any.
 ensureborders:
 	pkill -HUP mutter-x11

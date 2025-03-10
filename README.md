@@ -40,7 +40,7 @@ Basic `make` commands work in directories with a file `Makefile` specifying thes
 * If you want to reconnect again (**and the container is not stopped**) run `make connect` in host shell.
 * You may also kill/stop it with `make stop` in host shell, **but make sure that your (important) data is located inside a mounted volume** (explained in next section).
 * Rebooting the host machine will kill the container in the background, but progess **inside mounted volumes** is saved.
-* You may at some point want to erase the `~/.casa/data` folder used for External Data (e.g. network error while automatically downloading data at CASA startup). You can do so easily by running `make cleandata` in host.
+* You may at some point want to erase the content inside the `~/.casa/data` folder used for External Data (e.g. network error while automatically downloading data at CASA startup). You can do so easily by running `make cleanexternaldata` in host.
 
 ### Comments on paths and volume mounts
 

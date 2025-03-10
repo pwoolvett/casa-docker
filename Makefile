@@ -26,8 +26,8 @@ compose: .env xhost ensureborders
 # function to start container on host start-up, and/or connect to container shell
 start: ensureborders
 	docker compose up -d casa
-	docker compose excec -it casa bash
-	
+	docker compose exec -it casa bash
+
 # function to stop the container
 stop:
 	docker compose kill || true

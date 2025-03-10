@@ -87,15 +87,28 @@ RUN : \                    # This RUN sets a specific step "n/N" in the containe
   * Try again from start (*Make a backup Dockerfile:*)
 
 ## TODO
-* vwoolvett: What happens when container is built, but CASA version is changed and container re-built? Mounted volumes won't be affected, but does it affect anything else?
-* vwoolvett: Add option to install an ALMA pipeline version of CASA (for raw data calibration and imaging), instead of a normal CASA version (image processing).
-* vwoolvett: add uninstall procedure in Makefile to remove the container/image and/or reinstall from scratch.
+vwoolvett TODO & questions. I will create a separate branch to test some of these:
+* vwoolvett: I may be completely wrong, but I noticed the following: We should make a method in Makefile to only run `docker compose up -d casa`. Why? bc the `build` is only necessary when changing stuff for the container, but typical usage would be:
+  * User does `make` (running `make compose`) the very first time, container is 1:built, 2:started (`docker compose up -d casa`) and 3:shell is opened
+  * User does whatever inside (use CASA for example), then exits container and may stop it with `make stop` to power off the PC, though it is automatically stopped if host powers off.
+  * Next day, turns the PC on and has tu run `make` again **but only because the container is not running**, and I think in 99% of the cases building the container again is unnecessary, he would just need to get it running with `compose up` and then connect to shell.
+* So, proposed change:
+  * `make compose` does what it does already, (re)builds the image, runs the container and opens shell. Perhaps rename it to `make build`? Would be more intuitive.
+  * `make connect` (old `make bash`) does what it does already, just opens the container shell if the casa container is running.
+  * Add a method, something like `make start` that only runs `docker compose up -d casa`, displaying the "tick, casa container is running"
+  
+* By the way, how does `make` know it has to run `make compose` and not any other method inside Makefile?
 
-* cleanup compose: too many privileges
-* cleanup dockerfile: too many deps
-* detect wayland host and setup qt env vars
-* what fuse is needed on host? *vwoolvett: I installed libfuse2t64 (libfuse2 in ubuntu 24.04) to fix borders problem (fix was something else), but it was not necessary in the first place IMO.*
-* "make install" -> create bashrc alias to `cd && make`
+* vwoolvett: We should add uninstall procedure in Makefile to remove the container/image and/or reinstall from scratch.
+* vwoolvett: We could add the option to install an ALMA pipeline version of CASA (for raw data calibration and imaging), instead of a normal CASA version (image processing).
+* vwoolvett: What happens when container is built, but CASA version is changed and container re-built? Mounted volumes won't be affected I presume, but does it affect anything else?
+
+pwoolvett TODOs
+* pwoolvett: cleanup compose: too many privileges
+* pwoolvett: cleanup dockerfile: too many deps
+* pwoolvett: detect wayland host and setup qt env vars
+* pwoolvett: what fuse is needed on host? *vwoolvett: I installed libfuse2t64 (libfuse2 in ubuntu 24.04) to fix borders problem (fix was something else), but it was not necessary in the first place IMO.*
+* pwoolvett: "make install" -> create bashrc alias to `cd && make`
 
 ## LICENSE
 

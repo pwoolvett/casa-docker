@@ -97,7 +97,7 @@ vwoolvett TODO & questions. I will create a separate branch to test some of thes
   * `make connect` (old `make bash`) does what it does already, just opens the container shell if the casa container is running.
   * Add a method, something like `make start` that only runs `docker compose up -d casa`, displaying the "tick, casa container is running"
   
-* By the way, how does `make` know it has to run `make compose` and not any other method inside Makefile?
+* By the way, how does `make` know it has to run `make compose` and not any other method inside Makefile? -> Nevermind, first method without a dot is ran with `make`
 
 * vwoolvett: We should add uninstall procedure in Makefile to remove the container/image and/or reinstall from scratch.
 * vwoolvett: We could add the option to install an ALMA pipeline version of CASA (for raw data calibration and imaging), instead of a normal CASA version (image processing).

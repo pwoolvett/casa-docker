@@ -1,5 +1,6 @@
 # .gitignore sample
 
+.vscode/
 .env
 dotcasa/*
 !dotcasa/config.py

@@ -1,0 +1,63 @@
+name: Screenshot
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup x11
+      run: |
+        sudo apt-get install -y \
+          x11vnc \
+          tmate \
+          xorg \
+          openbox \
+          xvfb \
+          dbus-x11 \
+          scrot
+    - name: Launch x11
+      run: |
+          nohup bash .github/x11-openbox.sh &
+
+    - name: build image & setup container
+      run: |
+        echo "USER_GID=dummy" > .env
+        echo "USER_UID=dummy" >> .env
+        echo "USERNAME=dummy" >> .env
+        echo "CASA_VERSION=dummy" >> .env
+        make .env
+        make xhost
+        docker compose build
+        docker compose up -d casa
+        docker compose exec casa casaviewer
+      env:
+        DISPLAY: :0
+
+    - name: take screenshot
+      run: |
+          xeyes & sleep 3 && scrot /tmp/screenshot.png
+      env:
+        DISPLAY: :0
+
+    - name: Save screenshot as Build Artifact
+      id: artifact-upload-step
+      uses: actions/upload-artifact@v4.6.1
+      with:
+        path: /tmp/screenshot.png
+        if-no-files-found: error
+
+    - name: Output artifact ID
+      run: |
+        echo 'Artifact URL: ${{ steps.artifact-upload-step.outputs.artifact-url }}'
+        gh pr comment ${{ github.event.number }} --body "Validate Screenshot from '${{ steps.artifact-upload-step.outputs.artifact-url }}'"
+      env:
+       GH_TOKEN: ${{ github.token }}

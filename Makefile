@@ -18,10 +18,10 @@ DOCKER := $(shell command -v docker)
 
 # first function without dot is assigned to command "make"=="make compose".
 # This function builds the container and applies changes to other files.
-compose: .env xhost ensureborders
+# It also starts the container and opens a shell using function start.
+compose: .env xhost
 	docker compose build
-	docker compose up -d casa
-	docker compose exec -it casa bash
+	make start
 
 # function to start container on host start-up, and/or connect to container shell
 start: ensureborders
@@ -62,5 +62,8 @@ clean: stop
 cleanexternaldata:
 	rm -rf dotcasa/data/*
 
+# For some host configurations, the windows of the CASA GUI have no borders.
+# Main cause is that mutter did not initialize properly on system start-up.
+# This function re-starts mutter.
 ensureborders:
-	pkill -HUP mutter-x11
+	pkill -HUP mutter-x11 || true

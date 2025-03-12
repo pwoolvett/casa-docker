@@ -8,11 +8,11 @@ TARGET_DIR="/home/${USERNAME}/.casa/data"
 mkdir -p "$TARGET_DIR"
 sudo chown -R ${USER_UID}:${USER_GID} "$TARGET_DIR"
 
-# Entry 2: ensure casa/data folder exists. Remove if moving your data folder elsewhere.
+# Entry 2: ensure raw/science data folder exists and is owned by user in container.
 mkdir -p "/home/${USERNAME}/casa/data"
 sudo chown -R ${USER_UID}:${USER_GID} "/home/${USERNAME}/casa/data"
 
-# Entry 3: ensure casa/logs folder exists. Remove if moving your logs folder elsewhere.
+# Entry 3: ensure logs folder exists and is owned by user in container.
 mkdir -p "/home/${USERNAME}/casa/logs"
 sudo chown -R ${USER_UID}:${USER_GID} "/home/${USERNAME}/casa/logs"
 

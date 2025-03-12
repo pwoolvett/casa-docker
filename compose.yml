@@ -15,11 +15,13 @@ services:
       - DISPLAY=${DISPLAY?Run `export DISPLAY=:0` (or equivalent)"}
       - XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR?err"}  # QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-
     volumes:
+    # Base:
       - ${XDG_RUNTIME_DIR}:${XDG_RUNTIME_DIR}
       - /tmp/.X11-unix:/tmp/.X11-unix
       - /home/${USERNAME}/.Xauthority:/home/${USERNAME}/.Xauthority  # not needed?
-      - ${PWD}/casa:/home/${USERNAME}/casa
-      - ${PWD}/dotcasa:/home/${USERNAME}/.casa
+    # User:
+      - ${PWD}/dotcasa:/home/${USERNAME}/.casa  # default ~/.casa folder from current dir (casa-docker repo)
+      - ${PWD}/casa:/home/${USERNAME}/casa  # default ~/casa folder from current dir (casa-docker repo)
     devices:
       - "/dev/fuse:mrw"
       - "/dev/dri:/dev/dri"

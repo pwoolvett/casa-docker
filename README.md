@@ -61,13 +61,18 @@ Volumes are mounted from host to container, see `compose.yml`. Example:
 
 ```yaml
     volumes:
-      - ${PWD}/casa:/home/${USERNAME}/casa
-      - ${PWD}/dotcasa:/home/${USERNAME}/.casa
+    # Base
+      -
+      -
+      -
+    # User
+      - ${PWD}/dotcasa:/home/${USERNAME}/.casa  # default ~/.casa folder from current dir (casa-docker repo)
+      - ${PWD}/casa:/home/${USERNAME}/casa  # default ~/casa folder from current dir (casa-docker repo)
 ```
 
-This means the `./dotcasa` folder (besides this `README`) lives in `~/.casa` in the container.
+This means the `./dotcasa` folder (besides this `README`) lives in `~/.casa` in the container, idem for the casa folder.
 
-**Read the READMEs inside `./casa` and `./dotcasa` for more information on these default folders and how to move them safely.**
+**Read the READMEs inside `./casa` and `./dotcasa` for more information on these default folders and how to move them -or subfolders inside them- safely.**
 
 ### Comments on installed packages in container
 You may want to add additional packages to this docker container. To do so:

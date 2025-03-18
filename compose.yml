@@ -21,8 +21,8 @@ services:
       - /home/${USERNAME}/.Xauthority:/home/${USERNAME}/.Xauthority  # not needed?
     # User:
       - ${PWD}/dotcasa:/home/${USERNAME}/.casa  # default ~/.casa folder from current dir (casa-docker repo)
-      - ${PWD}/casa:/home/${USERNAME}/casa  # default ~/casa folder from current dir (casa-docker repo)
-      - /home/vicente/Documents/research/astrodata:/home/${USERNAME}/astrodata  # added my own folder for work
+      - /home/vicente/Documents/host_casa_folder:/home/${USERNAME}/casa  # my own casa mounted volume
+      - /home/vicente/Documents/research/astrodata:/home/${USERNAME}/casa/astrodata  # added my own folder for work
     devices:
       - "/dev/fuse:mrw"
       - "/dev/dri:/dev/dri"

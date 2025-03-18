@@ -9,11 +9,13 @@ mkdir -p "$TARGET_DIR"
 sudo chown -R ${USER_UID}:${USER_GID} "$TARGET_DIR"
 
 # Entry 2: ensure raw/science data folder exists and is owned by user in container.
-mkdir -p "/home/${USERNAME}/casa/data"
-sudo chown -R ${USER_UID}:${USER_GID} "/home/${USERNAME}/casa/data"
+# mkdir -p "/home/${USERNAME}/casa/data"
+# Mounted my own folder, just chown
+sudo chown -R ${USER_UID}:${USER_GID} "/home/${USERNAME}/casa/astrodata"
 
 # Entry 3: ensure logs folder exists and is owned by user in container.
 # mkdir -p "/home/${USERNAME}/casa/logs"
-sudo chown -R ${USER_UID}:${USER_GID} "/home/${USERNAME}/astrodata/casa/logs"
+# Mounted my own folder, just chown
+sudo chown -R ${USER_UID}:${USER_GID} "/home/${USERNAME}/casa/logs"
 
 exec "$@"

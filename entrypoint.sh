@@ -13,7 +13,7 @@ mkdir -p "/home/${USERNAME}/casa/data"
 sudo chown -R ${USER_UID}:${USER_GID} "/home/${USERNAME}/casa/data"
 
 # Entry 3: ensure logs folder exists and is owned by user in container.
-mkdir -p "/home/${USERNAME}/casa/logs"
-sudo chown -R ${USER_UID}:${USER_GID} "/home/${USERNAME}/casa/logs"
+# mkdir -p "/home/${USERNAME}/casa/logs"
+sudo chown -R ${USER_UID}:${USER_GID} "/home/${USERNAME}/astrodata/casa/logs"
 
 exec "$@"

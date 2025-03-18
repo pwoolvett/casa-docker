@@ -22,6 +22,7 @@ services:
     # User:
       - ${PWD}/dotcasa:/home/${USERNAME}/.casa  # default ~/.casa folder from current dir (casa-docker repo)
       - ${PWD}/casa:/home/${USERNAME}/casa  # default ~/casa folder from current dir (casa-docker repo)
+      - /home/vicente/Documents/research/astrodata:/home/${USERNAME}/astrodata  # added my own folder for work
     devices:
       - "/dev/fuse:mrw"
       - "/dev/dri:/dev/dri"

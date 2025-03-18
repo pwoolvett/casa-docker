@@ -26,7 +26,7 @@ compose: .env xhost
 # function to start container on host start-up, and/or connect to container shell
 start: ensureborders
 	docker compose up -d casa
-	docker compose exec -it casa bash
+	docker compose exec -w ~/astrodata/casa -it casa bash
 
 # function to stop the container
 stop:
